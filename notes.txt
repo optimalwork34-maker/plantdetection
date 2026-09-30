@@ -1,0 +1,74 @@
+Write a Python program to clean a dataset by handling missing values, removing duplicate records, and correcting data types.
+
+import pandas as pd
+
+# Load the dataset
+data = pd.read_csv("student_data.csv")
+
+# Display original data
+print("Original Data:")
+print(data)
+
+# Check missing values
+print("\nMissing Values:")
+print(data.isnull().sum())
+
+# Remove duplicate rows
+data = data.drop_duplicates()
+
+# Fill missing numerical values with mean
+data["Age"] = data["Age"].fillna(data["Age"].mean())
+data["Marks"] = data["Marks"].fillna(data["Marks"].mean())
+
+# Fill missing text values
+data["Name"] = data["Name"].fillna("Unknown")
+
+# Remove unwanted spaces from Name
+data["Name"] = data["Name"].str.strip()
+
+# Convert Age to integer
+data["Age"] = data["Age"].astype(int)
+
+# Display cleaned data
+print("\nCleaned Data:")
+print(data)
+
+# Check missing values again
+print("\nMissing Values After Cleaning:")
+print(data.isnull().sum())
+
+
+
+
+
+
+
+
+Raw Dataset
+     ↓
+Check Missing Values
+     ↓
+Remove Duplicates
+     ↓
+Handle Missing Values
+     ↓
+Remove Unwanted Spaces
+     ↓
+Correct Data Types
+     ↓
+Clean Dataset
+     ↓
+Ready for Analysis / Machine Learning
+
+
+| Function            | Purpose                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------- |
+| `isnull()`          | Finds missing values in the dataset                                                      |
+| `fillna()`          | Fills missing values with specified values                                               |
+| `dropna()`          | Removes rows or columns containing missing values                                        |
+| `drop_duplicates()` | Removes duplicate records from the dataset                                               |
+| `astype()`          | Changes the data type of a column                                                        |
+| `str.strip()`       | Removes unwanted spaces from text values                                                 |
+| `replace()`         | Replaces incorrect or unwanted values                                                    |
+| `head()`            | Displays the first 5 records of the dataset                                              |
+| `info()`            | Displays information about the dataset, such as columns, data types, and non-null values |
